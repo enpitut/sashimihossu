@@ -1,0 +1,30 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @item.name
+p
+  strong Amount at a time:
+  = @item.amount_at_a_time
+p
+  strong Gram at a time:
+  = @item.gram_at_a_time
+p
+  strong Price at a time:
+  = @item.price_at_a_time
+p
+  strong Price at one amount:
+  = @item.price_at_one_amount
+p
+  strong Price at one gram:
+  = @item.price_at_one_gram
+p
+  strong Description:
+  = @item.description
+p
+  strong Icon:
+  = @item.icon
+
+= link_to 'Edit', edit_item_path(@item)
+'|
+= link_to 'Back', items_path

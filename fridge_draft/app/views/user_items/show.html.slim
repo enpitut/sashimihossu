@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong User:
+  = @user_item.user_id
+p
+  strong Item:
+  = @user_item.item_id
+p
+  strong Remaining amount:
+  = @user_item.remaining_amount
+p
+  strong Remaining gram:
+  = @user_item.remaining_gram
+p
+  strong Title:
+  = @user_item.title
+p
+  strong Start:
+  = @user_item.start
+p
+  strong End:
+  = @user_item.end
+
+= link_to 'Edit', edit_user_item_path(@user_item)
+'|
+= link_to 'Back', user_items_path

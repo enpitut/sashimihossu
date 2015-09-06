@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FridgeDraft</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <header>
+      <nav>
+        <!-- homeへのリンク -->
+        <%= link_to "home", root_path %> |
+
+        <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
+        <% if user_signed_in? %>
+            <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
+            <!-- *_path はUserモデルを作成したときにdeviseにより自動で作成される -->
+            Logged in as <strong><%= current_user.email %></strong>.
+            <%= link_to "edit profile", edit_user_registration_path %> |
+            <%= link_to "logout", destroy_user_session_path, method: :delete %> |
+        <% else %>
+            <%= link_to "sign up", new_user_registration_path %> |
+            <%= link_to "sign in (login)", new_user_session_path %> |
+        <% end %>
+
+        <%= link_to "items", items_path %> |
+        <%= link_to "user_items", user_items_path %>
+      </nav>
+    </header>
+
+<!-- Devideが使用するflashメッセージ用 -->
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<%= yield %>
+
+</body>
+</html>

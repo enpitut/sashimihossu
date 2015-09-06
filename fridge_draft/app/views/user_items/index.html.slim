@@ -1,0 +1,33 @@
+h1 Listing user_items
+
+table
+  thead
+    tr
+      th User
+      th Item
+      th Remaining amount
+      th Remaining gram
+      th Title
+      th Start
+      th End
+      th
+      th
+      th
+
+  tbody
+    - @user_items.each do |user_item|
+      tr
+        td = user_item.user_id
+        td = user_item.item_id
+        td = user_item.remaining_amount
+        td = user_item.remaining_gram
+        td = user_item.title
+        td = user_item.start
+        td = user_item.end
+        td = link_to 'Show', user_item
+        td = link_to 'Edit', edit_user_item_path(user_item)
+        td = link_to 'Destroy', user_item, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New User item', new_user_item_path

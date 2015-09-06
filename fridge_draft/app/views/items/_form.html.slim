@@ -1,0 +1,34 @@
+= form_for @item do |f|
+  - if @item.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@item.errors.count, "error")} prohibited this item from being saved:"
+      ul
+        - @item.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :amount_at_a_time
+    = f.text_field :amount_at_a_time
+  .field
+    = f.label :gram_at_a_time
+    = f.text_field :gram_at_a_time
+  .field
+    = f.label :price_at_a_time
+    = f.text_field :price_at_a_time
+  .field
+    = f.label :price_at_one_amount
+    = f.text_field :price_at_one_amount
+  .field
+    = f.label :price_at_one_gram
+    = f.text_field :price_at_one_gram
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :icon
+    = f.text_field :icon
+    /= f.file_field :icon,accept: "image/jpeg"
+  .actions = f.submit
