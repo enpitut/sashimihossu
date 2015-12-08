@@ -1,0 +1,4 @@
+aliases : postfix alias settings
+main.cf : postfix settings
+items_controller.rb : ItemsController
+transfer_mail: shell script about mail

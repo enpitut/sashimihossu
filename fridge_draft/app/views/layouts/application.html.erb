@@ -8,10 +8,12 @@
 </head>
 <body>
     <header>
+      <!--トップのメニューバー-->
       <nav>
         <!-- homeへのリンク -->
         <%= link_to "home", root_path %> |
 
+        <!--ログインなど-->
         <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
         <% if user_signed_in? %>
             <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
@@ -24,6 +26,7 @@
             <%= link_to "sign in (login)", new_user_session_path %> |
         <% end %>
 
+        <!--モデル操作用-->
         <%= link_to "items", items_path %> |
         <%= link_to "user_items", user_items_path %>
       </nav>

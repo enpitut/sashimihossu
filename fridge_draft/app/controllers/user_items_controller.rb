@@ -62,18 +62,17 @@ class UserItemsController < ApplicationController
     end
   end
 
-  # ユーザidにもとづいて所持商品一覧を取得
+
+  # ユーザidにもとづいて所持商品一覧を取得してjsonで返す．fullcalender用
   # GET user_items/user/current_user.json
   def items_by_user
-    # @user_items = UserItem.find(:all, :conditions => { :user_id => params[:user_id] });
-    # @user_items = UserItem.find(:user_id => :all);
-    # @user_items = UserItem.find_by_user_id(params[:user_id]);
-    # @user_items = UserItem.where(:user_id => params[:user_id]);
+    # current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド
     @user_items = UserItem.where(:user_id => current_user.id);
     respond_to do |format|
       format.json { render :json => @user_items }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -10,15 +10,19 @@ Rails.application.routes.draw do
   # ユーザ。resources指定は、基本的なルーティングを全て自動で設定してくれる
   #resources :users
 
-  # Device用。自動追加。手動で追加した上記のUserモデルは削除すること。
+  # Device用。自動追加。手動で追加した上記のUserモデル用ルーティングは削除すること(Usersモデル自体は使用する)
   devise_for :users
 
   # item用
   resources :items
 
-  # userとitemの中間用
+  # userとitemをとりもち，カレンダーのイベントデータのストレージとしてもはたらくuser_items用．
+  # user_itemsコントローラのitems_by_userは，現在ログインしているユーザが所持するアイテムをとってくるメソッド．
+  # apiとしてアクセスしやすくするために，user_items/user/current_userという形でこれを叩けるようにしている．
   resources :user_items
   get 'user_items/user/current_user' => 'user_items#items_by_user'
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

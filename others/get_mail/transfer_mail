@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# controller のあるディレクトリへ
+cd /Users/shorikoshi/Documents/sashimihossu/fridge_draft/app/controllers
+
+# このスクリプトが実行される際に標準入力として流れてきたメールをtxtに保存し、controllerへ引き渡す
+if [ -p /dev/stdin ] ; then
+    nowtime=`date "+%Y%m%d%H%M%S"`
+    cat - > tmp/${nowtime}_mail.txt
+    rails runner -e development ItemsController.recvmail("$nowtime")
+fi

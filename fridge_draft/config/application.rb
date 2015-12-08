@@ -23,7 +23,8 @@ module FridgeDraft
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    # slim用
+
+    # rails g した際に作成されるビューファイルのデフォルトをslimにする
     config.generators.template_engine = :slim
 
     # hirb用
