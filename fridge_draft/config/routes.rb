@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  # homeコントローラのindexメソッドに飛ばせというルーティング。rubyで文の中の # は名前解決演算子。
+  # トップページはhomeコントローラのindexメソッドに飛ばせというルーティング。rubyで文の中の # は名前解決演算子。
   root 'home#index'
 
   # トップページのためのルーティング。コントローラとビューだけあり、モデルは作成していない
@@ -14,13 +14,17 @@ Rails.application.routes.draw do
   devise_for :users
 
   # item用
+  # items/index_by_user.jsonというurlにアクセスするとitems#index_by_userメソッドが叩かれ，
+  # 現在ログイン中のユーザidが所持するアイテム一覧がjsonで返る．
+  # resourcesより前に定義すること．そうしないと，通常のitems/1といったルーティングと混同されてしまう．
+  get 'items/index_by_user' => 'items#index_by_user'
   resources :items
 
   # userとitemをとりもち，カレンダーのイベントデータのストレージとしてもはたらくuser_items用．
   # user_itemsコントローラのitems_by_userは，現在ログインしているユーザが所持するアイテムをとってくるメソッド．
   # apiとしてアクセスしやすくするために，user_items/user/current_userという形でこれを叩けるようにしている．
-  resources :user_items
-  get 'user_items/user/current_user' => 'user_items#items_by_user'
+  #resources :user_items
+  #get 'user_items/user/current_user' => 'user_items#items_by_user'
 
 
 

@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824005355) do
+ActiveRecord::Schema.define(version: 20151209032224) do
 
   create_table "items", force: :cascade do |t|
-    t.string   "name"
+    t.string   "title"
     t.float    "amount_at_a_time"
     t.float    "gram_at_a_time"
     t.float    "price_at_a_time"
@@ -24,6 +24,12 @@ ActiveRecord::Schema.define(version: 20150824005355) do
     t.binary   "icon"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "user_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.float    "remaining_amount"
+    t.float    "remaining_gram"
+    t.boolean  "allDay"
   end
 
   create_table "user_items", force: :cascade do |t|

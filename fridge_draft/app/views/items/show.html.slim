@@ -1,8 +1,11 @@
 p#notice = notice
 
 p
-  strong Name:
-  = @item.name
+  strong title:
+  = @item.title
+p
+  strong User id:
+  = @item.user_id
 p
   strong Amount at a time:
   = @item.amount_at_a_time
@@ -18,6 +21,21 @@ p
 p
   strong Price at one gram:
   = @item.price_at_one_gram
+p
+  strong start:
+  = @item.start
+p
+  strong end:
+  = @item.end
+p
+  strong All day:
+  = @item.allDay
+p
+  strong Remaining amount:
+  = @item.remaining_amount
+p
+  strong Remaining gram:
+  = @item.remaining_gram
 p
   strong Description:
   = @item.description

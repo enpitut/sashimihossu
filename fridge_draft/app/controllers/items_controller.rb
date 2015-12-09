@@ -75,6 +75,21 @@ class ItemsController < ApplicationController
     end
   end
 
+
+  # ユーザidにもとづいて所持商品一覧を取得してjsonで返す．fullcalender用
+  # GET /items/index_by_user.json
+  def index_by_user
+    # current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド
+    @items = Item.where(:user_id => current_user.id);
+    respond_to do |format|
+      # 拡張子がjsonで来た場合のみ応答
+      format.json { render :json => @items }
+    end
+    # 拡張子で何が来ようが拡張子が無かろうがjsonで返す
+    # render :json => @items
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
@@ -83,7 +98,8 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :amount_at_a_time, :gram_at_a_time, :price_at_a_time, :price_at_one_amount, :price_at_one_gram, :description, :icon)
+      params.require(:item).permit(:title, :amount_at_a_time, :gram_at_a_time, :price_at_a_time, :price_at_one_amount, :price_at_one_gram, :description, :icon,
+                                   :user_id, :start, :end, :remaining_amount, :remaining_gram, :allDay)
     end
 
 

@@ -58,7 +58,7 @@ $(document).ready(function() {
         // 今回は，全てのエントリではなく，現在のユーザを特定してそのユーザに紐付いたエントリ(商品)をとってくる必要がある．
         // なので，そのための専用のルーティングで専用のメソッドに飛ばす． (user_itemsコントローラのitems_by_userメソッド)
         // これはjsonデータを返してくるようにコントローラで記述しているので，下記のように書けばカレンダーにイベントが表示される．
-        events: '/user_items/user/current_user',
+        events: '/items/index_by_user.json',
 
 
 
