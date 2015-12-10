@@ -1,0 +1,23 @@
+h1 Listing freshnesses
+
+table
+  thead
+    tr
+      th Name
+      th Freshness
+      th
+      th
+      th
+
+  tbody
+    - @freshnesses.each do |freshness|
+      tr
+        td = freshness.name
+        td = freshness.freshness
+        td = link_to 'Show', freshness
+        td = link_to 'Edit', edit_freshness_path(freshness)
+        td = link_to 'Destroy', freshness, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Freshness', new_freshness_path

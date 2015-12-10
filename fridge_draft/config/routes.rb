@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :freshnesses
   # トップページはhomeコントローラのindexメソッドに飛ばせというルーティング。rubyで文の中の # は名前解決演算子。
   root 'home#index'
 
@@ -12,6 +13,9 @@ Rails.application.routes.draw do
 
   # Device用。自動追加。手動で追加した上記のUserモデル用ルーティングは削除すること(Usersモデル自体は使用する)
   devise_for :users
+
+  # 現在ログイン中のユーザidを返すapi
+  get 'items/current_user_id' => 'items#current_user_id'
 
   # item用
   # items/index_by_user.jsonというurlにアクセスするとitems#index_by_userメソッドが叩かれ，

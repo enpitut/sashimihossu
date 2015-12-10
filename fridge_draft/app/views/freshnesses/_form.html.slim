@@ -1,0 +1,15 @@
+= form_for @freshness do |f|
+  - if @freshness.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@freshness.errors.count, "error")} prohibited this freshness from being saved:"
+      ul
+        - @freshness.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :freshness
+    = f.number_field :freshness
+  .actions = f.submit

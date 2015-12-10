@@ -10,11 +10,11 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require moment
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
-//= require moment
 //= require fullcalendar
 //= require fullcalendar/gcal
 //= require_tree .

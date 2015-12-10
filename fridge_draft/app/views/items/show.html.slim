@@ -1,46 +1,46 @@
 p#notice = notice
 
 p
-  strong title:
+  strong 食材名:
   = @item.title
-p
+/p
   strong User id:
   = @item.user_id
 p
-  strong Amount at a time:
+  strong 購入単位の個数:
   = @item.amount_at_a_time
 p
-  strong Gram at a time:
+  strong 購入単位のグラム数:
   = @item.gram_at_a_time
 p
-  strong Price at a time:
+  strong 購入単位の価格:
   = @item.price_at_a_time
 p
-  strong Price at one amount:
+  strong 個単位の価格:
   = @item.price_at_one_amount
 p
-  strong Price at one gram:
+  strong グラム単位の価格:
   = @item.price_at_one_gram
 p
-  strong start:
+  strong 購入日:
   = @item.start
 p
-  strong end:
+  strong 賞味期限日:
   = @item.end
-p
+/p
   strong All day:
   = @item.allDay
 p
-  strong Remaining amount:
+  strong 残数:
   = @item.remaining_amount
 p
-  strong Remaining gram:
+  strong 残グラム:
   = @item.remaining_gram
 p
-  strong Description:
+  strong コメント:
   = @item.description
-p
-  strong Icon:
+/p
+  strong アイコン:
   = @item.icon
 
 = link_to 'Edit', edit_item_path(@item)

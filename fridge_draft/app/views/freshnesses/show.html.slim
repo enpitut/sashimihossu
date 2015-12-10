@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @freshness.name
+p
+  strong Freshness:
+  = @freshness.freshness
+
+= link_to 'Edit', edit_freshness_path(@freshness)
+'|
+= link_to 'Back', freshnesses_path

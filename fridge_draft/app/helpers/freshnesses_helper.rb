@@ -1,0 +1,2 @@
+module FreshnessesHelper
+end

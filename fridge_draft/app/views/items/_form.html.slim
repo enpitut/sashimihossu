@@ -7,46 +7,49 @@
           li = message
 
   .field
-    = f.label :title
+    = f.label :食材名
     = f.text_field :title
-  .field
+  /.field
     = f.label :user_id
     = f.text_field :user_id
   .field
-    = f.label :amount_at_a_time
+    = f.label :購入単位の個数
     = f.text_field :amount_at_a_time
   .field
-    = f.label :gram_at_a_time
+    = f.label :購入単位のグラム数
     = f.text_field :gram_at_a_time
   .field
-    = f.label :price_at_a_time
+    = f.label :購入単位の価格
     = f.text_field :price_at_a_time
   .field
-    = f.label :price_at_one_amount
+    = f.label :個単位の価格
     = f.text_field :price_at_one_amount
   .field
-    = f.label :price_at_one_gram
+    = f.label :グラム単位の価格
     = f.text_field :price_at_one_gram
   .field
-    = f.label :start
+    = f.label :購入日
     = f.datetime_select :start
   .field
-    = f.label :end
+    = f.label :賞味期限日
     = f.datetime_select :end
-  .field
+  /.field
     = f.label :allDay
-    = f.datetime_select :allDay
+    = f.check_box :allDay
   .field
-    = f.label :remaining_amount
+    = f.label :残数
     = f.text_field :remaining_amount
   .field
-    = f.label :remaining_gram
+    = f.label :残グラム
     = f.text_field :remaining_gram
   .field
-    = f.label :description
+    = f.label :コメント
     = f.text_area :description
-  .field
-    = f.label :icon
+  /.field
+    = f.label :アイコン
     = f.text_field :icon
     /= f.file_field :icon,accept: "image/jpeg"
   .actions = f.submit
+
+p
+  = link_to 'この食材を破棄', @item, data: {:confirm => '本当に破棄しますか？'}, :method => :delete

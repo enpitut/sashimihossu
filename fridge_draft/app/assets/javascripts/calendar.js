@@ -14,18 +14,19 @@ $(document).ready(function() {
             // 'prev'→前へボタン
             // 'next'→次へボタン
             // 'today'→当日表示ボタン
-            left: 'month agendaWeek agendaDay', //左側に配置する要素
+            left: 'today', //'month agendaWeek agendaDay', //左側に配置する要素
             center: 'title', //中央に配置する要素
-            right: 'today prev next' //右側に配置する要素
+            right: 'prev next' //右側に配置する要素
         },
 
-        height: 900, //高さをピクセルで指定
+        height: 800, //高さをピクセルで指定
         defaultView: 'month', // 初めの表示内容を指定 http://fullcalendar.io/docs/views/Available_Views/
         editable: true, // trueでスケジュールを編集可能にする
-        selectable:true, // ドラッグで範囲選択可能
+        selectable:true, // ドラッグで範囲選択
         selectHelper:true,
-        droppable: true, // 外部要素からのドラッグアンドドロップを可にする
-        allDaySlot: false, //falseでagendaDay表示のときに全日の予定欄を非表示にする
+        droppable: false, // 外部要素からのドラッグアンドドロップ
+        draggable: false,
+        allDaySlot: false, //falseでagendaDay表示のときに全日の予定欄の表示非表示
 
         //時間の表示フォーマットを指定する http://momentjs.com/docs/#/displaying/format/
         timeFormat: {
@@ -119,56 +120,51 @@ $(document).ready(function() {
             // データを作成してサーバ側へ反映させる
             //---------------------------------
 
-            // 以下は全てdefferedのthenでつなげる
+            // 以下は全てdefferedのthenでつなげるように書き換える
 
-            // 新規アイテムを作成
-            //var item_id = -1;
-            //var title = window.prompt("イベントを登録します．イベントタイトル:");
-            //var data = {event: {user_id: hoge,
-            //                    item_id: hoge,
-            //                    title: title,
-            //                    start: start,
-            //                    end: end}};
-            //                    //allDay: allDay}};
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/user_items",
-            //    data: data,
-            //    success: function() {
-            //        calendar.fullCalendar('refetchEvents');
-            //    }
-            //});
+            var title = window.prompt("食材を登録します．食材名:");
+
+            // ここで，上記で入力された食材名からデータベースにアクセスして賞味期限をとってくる
+
 
             // 現在のユーザidをサーバ側からとってくる
-            //var current_user_id = -1;
-            //$.ajax({
-            //    type: "GET",
-            //    url: "/user_items/hoge",
-            //    data: data
-            //}).done(function(data){ //ajaxの通信に成功した場合
-            //    //$(".example").html(data);
-            //}).fail(function(data){ //ajaxの通信に失敗した場合
-            //    //alert("error!");
-            //});
+            var current_user_id = -1;
+            $.ajax({
+                type: "GET",
+                url: "items/current_user_id",
+            }).done(function(response){ //ajaxの通信に成功した場合
+                console.log(response);
+                current_user_id = response;
 
-            // 以上を用いてイベントを作成・登録
-            //var title = window.prompt("イベントを登録します．イベントタイトル:");
-            //var data = {event: {user_id: hoge,
-            //                    item_id: hoge,
-            //                    title: title,
-            //                    start: start,
-            //                    end: end}};
-            //                    //allDay: allDay}};
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/user_items",
-            //    data: data
-            //}).done(function(data){ //ajaxの通信に成功した場合
-            //    calendar.fullCalendar('refetchEvents');
-            //}).fail(function(data){ //ajaxの通信に失敗した場合
-            //    //alert("error!");
-            //});
-            //calendar.fullCalendar('unselect');
+                // 新規アイテムを作成
+                var data = {item: {
+                    //user_id: hoge,
+                    //item_id: hoge,
+                    title: title,
+                    user_id: current_user_id,
+                    start: start.format(), // このようにformat()してやらないとmoment.js周りでエラーを吐いてajaxに失敗する
+                    end: end.format(),
+                    all_day: true}};
+                    //allDay: allDay}};
+                $.ajax({
+                    type: "POST",
+                    url: "/items",
+                    dataType: "json",
+                    data: data
+                }).done(function(response){ //ajaxの通信に成功した場合
+                    console.log(response);
+                    calendar.fullCalendar('refetchEvents');
+                    // 編集画面に遷移
+                    var editUrl = "/items/" + response.id + "/edit";
+                    window.location.href = editUrl;
+                }).fail(function(response){ //ajaxの通信に失敗した場合
+                    //alert("error!");
+                });
+                calendar.fullCalendar('unselect');
+
+            }).fail(function(response){ //ajaxの通信に失敗した場合
+                alert("error!");
+            });
         },
 
         // カレンダーのマス内のイベント部分をクリックしたときの処理
@@ -186,6 +182,10 @@ $(document).ready(function() {
             //    event.title = title;
             //    calendar.fullCalendar('updateEvent', event); //イベント（予定）の修正
             //}
+
+            // 編集画面に遷移
+            var editUrl = "/items/" + event.id + "/edit";
+            window.location.href = editUrl;
         },
 
         // カレンダーのマス内のイベントではない部分をクリックしたときの処理
