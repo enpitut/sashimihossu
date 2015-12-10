@@ -1,3 +1,95 @@
 // Place all the styles related to the items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#right-column {
+  overflow-y: scroll;
+
+  table {
+    position: relative;
+    float: left;
+    width: 100%;
+
+    tr {
+      height: 60px;
+      color: #ffffff;
+
+      td {
+        font-size: 14px;
+      }
+      td.left {
+        //width: 40%;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      td.right {
+        //width: 60%;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+    tr:nth-child(even) {
+      background-color: rgb(101, 172, 107);
+    }
+    //tr:nth-child(odd) {
+    //  background-color: rgb(135, 184, 138);
+    //}
+  }
+
+  // formのsubmitボタン用
+  input[type="submit"] {
+    margin-bottom: -10px;
+    padding: 0;
+    width: 100%;
+    background-color: rgb(65, 117, 172);
+    border-style: none;
+    color: #ffffff;
+    line-height: 60px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .div_button_container {
+    position:relative;
+    //float: left;
+    //bottom: 0;
+  }
+  .div_button {
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 60px;
+
+    a {
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      color: #ffffff;
+      line-height: 60px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+    }
+    a:hover {
+      filter:alpha(opacity=20);
+      -moz-opacity: 0.2;
+      opacity: 0.2;
+    }
+  }
+  .div_button.button_edit {
+    background-color: rgb(120, 171, 172);
+  }
+  .div_button.button_destroy {
+    background-color: rgb(172, 89, 89);
+  }
+
+  .clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+}

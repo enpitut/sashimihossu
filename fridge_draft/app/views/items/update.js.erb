@@ -1,0 +1,9 @@
+//カレンダーを再描画
+$('#calendar').fullCalendar('rendar');
+
+// カレンダー用のデータを再取得
+$('#calendar').fullCalendar('refetchEvents');
+
+// 部分テンプレート(_show)を表示(前回の内容を消してから)
+$("#right-column").html("");
+$("#right-column").html("<%= j( render(:partial => 'show') ) %>");

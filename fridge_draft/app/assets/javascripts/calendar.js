@@ -19,7 +19,7 @@ $(document).ready(function() {
             right: 'prev next' //右側に配置する要素
         },
 
-        height: 800, //高さをピクセルで指定
+        height: window.innerHeight - 114, //高さをピクセルで指定
         defaultView: 'month', // 初めの表示内容を指定 http://fullcalendar.io/docs/views/Available_Views/
         editable: true, // trueでスケジュールを編集可能にする
         selectable:true, // ドラッグで範囲選択
@@ -123,48 +123,80 @@ $(document).ready(function() {
             // 以下は全てdefferedのthenでつなげるように書き換える
 
             var title = window.prompt("食材を登録します．食材名:");
+            //何も入力されなければイベントを作らない
+            if (title == null) {
+                console.log("event create was aborted.");
+                return;
+            }
 
             // ここで，上記で入力された食材名からデータベースにアクセスして賞味期限をとってくる
-
-
-            // 現在のユーザidをサーバ側からとってくる
-            var current_user_id = -1;
+            var freshness = -1;
+            var data = {name: title};
             $.ajax({
                 type: "GET",
-                url: "items/current_user_id",
-            }).done(function(response){ //ajaxの通信に成功した場合
-                console.log(response);
-                current_user_id = response;
+                url: "freshnesses/freshness_by_name.json",
+                dataType: "json",
+                data: data
+            }).done(function(response){
+                //console.log(response);
+                freshness = response;
+                var end2 = end;
+                if (freshness != -1) {
+                    end2 = end2.add('days', freshness);
+                }
 
-                // 新規アイテムを作成
-                var data = {item: {
-                    //user_id: hoge,
-                    //item_id: hoge,
-                    title: title,
-                    user_id: current_user_id,
-                    start: start.format(), // このようにformat()してやらないとmoment.js周りでエラーを吐いてajaxに失敗する
-                    end: end.format(),
-                    all_day: true}};
-                    //allDay: allDay}};
+                // 現在のユーザidをサーバ側からとってくる
+                var current_user_id = -1;
                 $.ajax({
-                    type: "POST",
-                    url: "/items",
-                    dataType: "json",
-                    data: data
+                    type: "GET",
+                    url: "items/current_user_id",
                 }).done(function(response){ //ajaxの通信に成功した場合
-                    console.log(response);
-                    calendar.fullCalendar('refetchEvents');
-                    // 編集画面に遷移
-                    var editUrl = "/items/" + response.id + "/edit";
-                    window.location.href = editUrl;
-                }).fail(function(response){ //ajaxの通信に失敗した場合
-                    //alert("error!");
-                });
-                calendar.fullCalendar('unselect');
+                    //console.log(response);
+                    current_user_id = response;
 
-            }).fail(function(response){ //ajaxの通信に失敗した場合
+                    // 新規アイテムを作成
+                    var data2 = {item: {
+                        //user_id: hoge,
+                        //item_id: hoge,
+                        title: title,
+                        user_id: current_user_id,
+                        start: start.format(), // このようにformat()してやらないとmoment.js周りでエラーを吐いてajaxに失敗する
+                        end: end2.format(),
+                        all_day: true}};
+                    //allDay: allDay}};
+                    $.ajax({
+                        type: "POST",
+                        url: "/items",
+                        dataType: "json",
+                        data: data2
+                    }).done(function(response){
+                        //console.log(response);
+                        calendar.fullCalendar('refetchEvents');
+                        var editUrl = "/items/" + response.id + "/edit.js";
+                        //window.location.href = editUrl; // 編集画面に遷移
+                        // 編集画面をリクエスト(rails側では部分テンプレートとしてこれを返す)
+                        $.ajax({
+                            type: "GET",
+                            url: editUrl
+                        }).done(function(response){
+                            //
+                        }).fail(function(response){
+                            alert("error!");
+                        });
+                    }).fail(function(response){
+                        alert("error!");
+                    });
+                    // カレンダーの選択表示を解除
+                    calendar.fullCalendar('unselect');
+
+                }).fail(function(response){ //ajaxの通信に失敗した場合
+                    alert("error!");
+                });
+            }).fail(function(response){
                 alert("error!");
             });
+
+
         },
 
         // カレンダーのマス内のイベント部分をクリックしたときの処理
@@ -184,8 +216,17 @@ $(document).ready(function() {
             //}
 
             // 編集画面に遷移
-            var editUrl = "/items/" + event.id + "/edit";
-            window.location.href = editUrl;
+            //var editUrl = "/items/" + event.id + "/edit";
+            //window.location.href = editUrl;
+
+            $.ajax({
+                type: "GET",
+                url: "/items/" + event.id + ".js",
+            }).done(function(response){ //ajaxの通信に成功した場合
+                //$('#right-column').html(response)
+            }).fail(function(response){ //ajaxの通信に失敗した場合
+                alert("error!");
+            });
         },
 
         // カレンダーのマス内のイベントではない部分をクリックしたときの処理

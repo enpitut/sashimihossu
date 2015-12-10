@@ -1,0 +1,8 @@
+//カレンダーを再描画
+$('#calendar').fullCalendar('rendar');
+
+// カレンダー用のデータを再取得
+$('#calendar').fullCalendar('refetchEvents');
+
+// 当該アイテムを削除したので詳細表示も消す
+$("#right-column").html("");

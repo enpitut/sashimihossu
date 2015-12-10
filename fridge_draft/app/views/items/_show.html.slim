@@ -1,0 +1,68 @@
+table
+  tbody
+    tr
+      td.left
+        strong 食材名:
+      td.right
+        = @item.title
+    tr
+      td.left
+        strong 購入単位の個数:
+      td.right
+        = @item.amount_at_a_time
+    tr
+      td.left
+        strong 購入単位のグラム数:
+      td.right
+        = @item.gram_at_a_time
+    tr
+      td.left
+        strong 購入単位の価格:
+      td.right
+        = @item.price_at_a_time
+    tr
+      td.left
+        strong 個単位の価格:
+      td.right
+        = @item.price_at_one_amount
+    tr
+      td.left
+        strong グラム単位の価格:
+      td.right
+        = @item.price_at_one_gram
+    tr
+      td.left
+        strong 購入日:
+      td.right
+        = @item.start
+    tr
+      td.left
+        strong 賞味期限日:
+      td.right
+        = @item.end
+    tr
+      td.left
+        strong 残数:
+      td.right
+        = @item.remaining_amount
+    tr
+      td.left
+        strong 残グラム:
+      td.right
+        = @item.remaining_gram
+    tr
+      td.left
+        strong コメント:
+      td.right
+        = @item.description
+    /tr
+      td.left
+        strong アイコン:
+      td
+        = @item.icon
+
+div.div_button_container.clearfix
+  div.div_button.button_edit
+    = link_to '編集', edit_item_path(@item), :remote => true
+  div.div_button.button_destroy
+    = link_to '破棄', @item, data: {:confirm => '本当に破棄しますか？'}, :method => :delete, :remote => true

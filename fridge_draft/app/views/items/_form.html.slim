@@ -1,55 +1,77 @@
-= form_for @item do |f|
+/ページ遷移したくないので:remote => trueにしておく
+= form_for @item, :remote => true do |f|
   - if @item.errors.any?
     #error_explanation
       h2 = "#{pluralize(@item.errors.count, "error")} prohibited this item from being saved:"
       ul
         - @item.errors.full_messages.each do |message|
           li = message
+  table
+    tbody
+      tr
+        td.left
+          = f.label :食材名
+        td.right
+          = f.text_field :title, :size=>'40'
+      tr
+        td.left
+          = f.label :購入単位の個数
+        td.right
+          = f.text_field :amount_at_a_time, :size=>'40'
+      tr
+        td.left
+          = f.label :購入単位のグラム数
+        td.right
+          = f.text_field :gram_at_a_time, :size=>'40'
+      tr
+        td.left
+          = f.label :購入単位の価格
+        td.right
+          = f.text_field :price_at_a_time, :size=>'40'
+      tr
+        td.left
+          = f.label :個単位の価格
+        td.right
+          = f.text_field :price_at_one_amount, :size=>'40'
+      tr
+        td.left
+          = f.label :グラム単位の価格
+        td.right
+          = f.text_field :price_at_one_gram, :size=>'40'
+      tr
+        td.left
+          = f.label :購入日
+        td.right
+          = f.date_select :start, :size=>'40'
+      tr
+        td.left
+          = f.label :賞味期限日
+        td.right
+          = f.date_select :end, :size=>'40'
+      tr
+        td.left
+          = f.label :残数
+        td.right
+          = f.text_field :remaining_amount, :size=>'40'
+      tr
+        td.left
+          = f.label :残グラム
+        td.right
+          = f.text_field :remaining_gram, :size=>'40'
+      tr
+        td.left
+          = f.label :コメント
+        td.right
+          = f.text_area :description, :size=>'40x10'
+      /tr
+        td.left
+          = f.label :アイコン
+          = f.text_field :icon
+          = f.file_field :icon,accept: "image/jpeg"
+  .actions = f.submit '編集を反映'
 
-  .field
-    = f.label :食材名
-    = f.text_field :title
-  /.field
-    = f.label :user_id
-    = f.text_field :user_id
-  .field
-    = f.label :購入単位の個数
-    = f.text_field :amount_at_a_time
-  .field
-    = f.label :購入単位のグラム数
-    = f.text_field :gram_at_a_time
-  .field
-    = f.label :購入単位の価格
-    = f.text_field :price_at_a_time
-  .field
-    = f.label :個単位の価格
-    = f.text_field :price_at_one_amount
-  .field
-    = f.label :グラム単位の価格
-    = f.text_field :price_at_one_gram
-  .field
-    = f.label :購入日
-    = f.datetime_select :start
-  .field
-    = f.label :賞味期限日
-    = f.datetime_select :end
-  /.field
-    = f.label :allDay
-    = f.check_box :allDay
-  .field
-    = f.label :残数
-    = f.text_field :remaining_amount
-  .field
-    = f.label :残グラム
-    = f.text_field :remaining_gram
-  .field
-    = f.label :コメント
-    = f.text_area :description
-  /.field
-    = f.label :アイコン
-    = f.text_field :icon
-    /= f.file_field :icon,accept: "image/jpeg"
-  .actions = f.submit
-
-p
-  = link_to 'この食材を破棄', @item, data: {:confirm => '本当に破棄しますか？'}, :method => :delete
+div.div_button_container.clearfix
+  div.div_button.button_edit
+    = link_to 'キャンセル', { :controller => :items, :action => :show }, :remote => true
+  div.div_button.button_destroy
+    = link_to '食材を破棄', @item, data: {:confirm => '本当に破棄しますか？'}, :method => :delete, :remote => true

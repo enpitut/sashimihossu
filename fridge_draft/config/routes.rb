@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :freshnesses
   # トップページはhomeコントローラのindexメソッドに飛ばせというルーティング。rubyで文の中の # は名前解決演算子。
   root 'home#index'
 
@@ -23,6 +22,10 @@ Rails.application.routes.draw do
   # resourcesより前に定義すること．そうしないと，通常のitems/1といったルーティングと混同されてしまう．
   get 'items/index_by_user' => 'items#index_by_user'
   resources :items
+
+  # freshness用
+  get 'freshnesses/freshness_by_name' => 'freshnesses#freshness_by_name'
+  resources :freshnesses
 
   # userとitemをとりもち，カレンダーのイベントデータのストレージとしてもはたらくuser_items用．
   # user_itemsコントローラのitems_by_userは，現在ログインしているユーザが所持するアイテムをとってくるメソッド．

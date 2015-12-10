@@ -43,6 +43,9 @@ p
   strong アイコン:
   = @item.icon
 
-= link_to 'Edit', edit_item_path(@item)
-'|
-= link_to 'Back', items_path
+p
+  = link_to 'この食材を破棄', @item, data: {:confirm => '本当に破棄しますか？'}, :method => :delete
+
+/= link_to 'Edit', edit_item_path(@item)
+/'|
+/= link_to 'Back', items_path

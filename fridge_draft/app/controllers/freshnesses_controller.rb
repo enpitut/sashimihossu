@@ -10,6 +10,11 @@ class FreshnessesController < ApplicationController
   # GET /freshnesses/1
   # GET /freshnesses/1.json
   def show
+    # @freshness = Freshness.find(params[:id])
+    # respond_to do |format|
+    #   format.html { render :show }
+    #   format.json { render :show, status: :ok, location: @freshness }
+    # end
   end
 
   # GET /freshnesses/new
@@ -61,6 +66,19 @@ class FreshnessesController < ApplicationController
     end
   end
 
+
+  #=================================================================================================================================================
+  # アイテム名から賞味期間をとってくる
+  def freshness_by_name
+    @freshness = Freshness.where(:name => params['name']).first();
+    respond_to do |format|
+      format.json { render :json => @freshness.freshness }
+      # format.json { render :json => @freshness, location: @freshness }
+    end
+  end
+
+
+  #=================================================================================================================================================
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_freshness
