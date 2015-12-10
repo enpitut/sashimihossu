@@ -1,25 +1,26 @@
-- @recipes.each do |recipe|
-  table
-    tbody
-      /tr
-        td.icon_td colspan='2'
-          = image_tag @item.icon.url, :class => 'item_icon'
-      tr
-        td.left
-          strong レシピ名:
-        td.right
-          = recipe.title
-      tr
-        td.left
-          strong url:
-        td.right
-          = recipe.url
-      = recipe.ingredient_list.each do |ingredient|
-        tr
+div.main_content.clearfix
+  - @recipes.each do |recipe|
+    table
+      tbody
+        /tr
+          td.icon_td colspan='2'
+            = image_tag @item.icon.url, :class => 'item_icon'
+        tr.recipe_title
           td.left
-            strong = ingredient.name
+            strong レシピ名:
           td.right
-            = ingredient.amount
+            = link_to recipe.title, recipe.url, :target => '_blank'
+        /tr
+          td.left
+            strong url:
+          td.right
+            = link_to recipe.url
+        - recipe.ingredient_list.each do |ingredient|
+          tr
+            td.left
+              strong = ingredient.name
+            td.right
+              = ingredient.amount
 
   /div.div_button_container.clearfix
   /div.div_button.button_recipe

@@ -4,51 +4,94 @@
 
 
 .item_icon {
+  border: solid 4px rgb(186, 186, 186);
+  //border: solid 4px rgb(215, 214, 69);
   border-radius: 50px;
 }
 
 #right-column {
-  overflow-y: scroll;
+  //overflow-y: scroll;
+  background: center no-repeat url("fridge_logo_05.png") rgb(90, 153, 95);
+  background-size: 240px;
 
-  table {
+  //.loading {
+  //  position: absolute;
+  //  float: left;
+  //  top: 0;
+  //  left: 0;
+  //  width: 100%;
+  //  height: 100%;
+  //  background-color: black;
+  //}
+
+  .main_content {
     position: relative;
     float: left;
+    overflow-y: scroll;
     width: 100%;
 
-    tr {
-      height: 50px;
-      color: #ffffff;
+    table {
+      position: relative;
+      float: left;
+      padding: 4px;
+      width: 100%;
+      border-spacing: 0;
+      //border: solid 2px rgb(90, 153, 95);
 
-      td {
-        font-size: 14px;
+      tr {
+        height: 50px;
+        color: #ffffff;
+
+        td {
+          font-size: 14px;
+
+          a {
+            //text-decoration: none;
+            color: grey;
+          }
+        }
+        td.left {
+          //width: 40%;
+          padding-left: 20px;
+          padding-right: 20px;
+          border-right: solid 2px rgb(90, 153, 95);
+        }
+        td.right {
+          //width: 60%;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        td.icon_td {
+          padding: 10px 0;
+          text-align: center;
+        }
       }
-      td.left {
-        //width: 40%;
-        padding-left: 20px;
-        padding-right: 20px;
+      tr:nth-child(even) {
+        background-color: rgb(101, 172, 107);
       }
-      td.right {
-        //width: 60%;
-        padding-left: 20px;
-        padding-right: 20px;
+      tr:nth-child(odd) {
+        background-color: rgb(90, 153, 95);
       }
-      td.icon_td {
-        padding: 10px 0;
-        text-align: center;
+      tr.item_icon {
+        //background-color: whitesmoke;
+        background-color: rgb(90, 153, 95);
+      }
+      tr.item_title {
+        td {
+          font-size: 18px;
+          font-weight: bold;
+        }
+      }
+      tr.recipe_title {
+        background-color: whitesmoke;
+
+        td {
+          color: grey;
+          font-size: 18px;
+          font-weight: bold;
+        }
       }
     }
-    tr:first-child {
-      td {
-        font-size: 18px;
-        font-weight: bold;
-      }
-    }
-    tr:nth-child(even) {
-      background-color: rgb(101, 172, 107);
-    }
-    //tr:nth-child(odd) {
-    //  background-color: rgb(135, 184, 138);
-    //}
   }
 
   // formのsubmitボタン用
@@ -65,9 +108,10 @@
   }
 
   .div_button_container {
-    position:relative;
+    position:absolute;
     //float: left;
-    //bottom: 0;
+    bottom: 0;
+    width: 100%;
   }
   .div_button {
     position: relative;
@@ -94,7 +138,7 @@
       opacity: 0.2;
     }
   }.div_button.button_recipe {
-     background-color: rgb(195, 193, 86);
+     background-color: rgb(215, 214, 69);
    }
   .div_button.button_edit {
     background-color: rgb(120, 171, 172);

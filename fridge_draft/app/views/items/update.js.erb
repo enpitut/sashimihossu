@@ -7,3 +7,4 @@ $('#calendar').fullCalendar('refetchEvents');
 // 部分テンプレート(_show)を表示(前回の内容を消してから)
 $("#right-column").html("");
 $("#right-column").html("<%= j( render(:partial => 'show') ) %>");
+$(".main_content").css("height", $("#right-column").height() - 180)

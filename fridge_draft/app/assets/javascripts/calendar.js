@@ -19,7 +19,7 @@ $(document).ready(function() {
             right: 'prev next' //右側に配置する要素
         },
 
-        height: window.innerHeight - 114, //高さをピクセルで指定
+        height: window.innerHeight - 142, //高さをピクセルで指定
         defaultView: 'month', // 初めの表示内容を指定 http://fullcalendar.io/docs/views/Available_Views/
         editable: true, // trueでスケジュールを編集可能にする
         selectable:true, // ドラッグで範囲選択

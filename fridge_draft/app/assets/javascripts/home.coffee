@@ -23,7 +23,8 @@ $ ->
 
   # ウィンドウロード時に右カラムをリサイズ
   $(window).ready ->
-    $("#right-column").css("height", window.innerHeight - 114)
+    $("#right-column").css("height", window.innerHeight - 142)
+    $(".main_content").css("height", $("#right-column").height() - 208)
     return
   # ウィンドウリサイズ終了時に右カラムをリサイズ
   timer = false
@@ -32,7 +33,7 @@ $ ->
       clearTimeout timer
     timer = setTimeout((->
       console.log $("#calendar")
-      $("#right-column").css("height", window.innerHeight - 114)
+      $("#right-column").css("height", window.innerHeight - 142)
       return
     ), 200)
     return

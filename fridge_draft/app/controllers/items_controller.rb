@@ -134,6 +134,7 @@ class ItemsController < ApplicationController
     # 複数渡せるようにarrayにしているが，フロントが複数選択に未対応のためとりあえず1個だけクエリを渡す．
     array << params[:name]
     @recipes = acquire_recommended_recipes(array);
+    #puts @recipes
     respond_to do |format|
       format.js # show_recipes.js.erb が実行される
     end
@@ -184,9 +185,9 @@ class ItemsController < ApplicationController
       file.close
 
       # デバッグ出力
-      @parsed_items.each do|key,value|
-        puts key.to_s+": "+value.to_s
-      end
+      # @parsed_items.each do|key,value|
+      #   puts key.to_s+": "+value.to_s
+      # end
 
       # パースしたデータをもとにアイテムエントリを作成
       @parsed_items.each do|key,value|
@@ -399,31 +400,31 @@ class ItemsController < ApplicationController
         ##############################
         # 0.1~1.0秒の間でランダム時間待つ
         ##############################
-        sleep(random.rand(1..10)*0.1)
+        sleep(random.rand(1..10)*0.01)
       end
     end
 
-    ##############################
-    # txtファイルへ書込み
-    ##############################
-    File.open("./tmp/recipe.txt", "w") do |file|
-      for recipe in recipe_list do
-        file.puts "\n--------------------------------------------------\n"
-        if (recipe.amount != "")
-          file.puts "------ " + recipe.title + " (" + recipe.amount + ") ------\n"
-        else
-          file.puts "------ " + recipe.title + " ------\n"
-        end
-        file.puts "--------------------------------------------------\n\n"
-        for ingredient in recipe.ingredient_list do
-          # if (recipe.id == ingredient.id)
-          file.puts "\t" + ingredient.name + " => " + ingredient.amount
-          # end
-        end
-        file.puts "\n\t" + "URL: " + recipe.url + "\n\t" + "取得日: " + recipe.date + "\n"
-        file.puts "--------------------------------------------------\n"
-      end
-    end
+    # ##############################
+    # # txtファイルへ書込み
+    # ##############################
+    # File.open("./tmp/recipe.txt", "w") do |file|
+    #   for recipe in recipe_list do
+    #     file.puts "\n--------------------------------------------------\n"
+    #     if (recipe.amount != "")
+    #       file.puts "------ " + recipe.title + " (" + recipe.amount + ") ------\n"
+    #     else
+    #       file.puts "------ " + recipe.title + " ------\n"
+    #     end
+    #     file.puts "--------------------------------------------------\n\n"
+    #     for ingredient in recipe.ingredient_list do
+    #       # if (recipe.id == ingredient.id)
+    #       file.puts "\t" + ingredient.name + " => " + ingredient.amount
+    #       # end
+    #     end
+    #     file.puts "\n\t" + "URL: " + recipe.url + "\n\t" + "取得日: " + recipe.date + "\n"
+    #     file.puts "--------------------------------------------------\n"
+    #   end
+    # end
 
     # レシピ構造体が要素である配列を返す
     return recipe_list

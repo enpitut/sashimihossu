@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # controller のあるディレクトリへ
-cd /Users/shorikoshi/Documents/sashimihossu/fridge_draft/app/controllers
+cd /Users/sky-legacy/devWorks/others/sashimihossu/fridge_draft/app/controllers
 
 # このスクリプトが実行される際に標準入力として流れてきたメールをtxtに保存し、
 # これを読むcontrollerのメソッドを叩く

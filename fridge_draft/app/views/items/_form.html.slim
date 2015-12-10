@@ -1,75 +1,77 @@
-/ページ遷移したくないので:remote => trueにしておく
-= form_for @item, :remote => true do |f|
-  - if @item.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@item.errors.count, "error")} prohibited this item from being saved:"
-      ul
-        - @item.errors.full_messages.each do |message|
-          li = message
-  table
-    tbody
-      tr
-        td.left
-          = f.label :食材名
-        td.right
-          = f.text_field :title, :size=>'40'
-      tr
-        td.left
-          = f.label :購入単位の個数
-        td.right
-          = f.text_field :amount_at_a_time, :size=>'40'
-      tr
-        td.left
-          = f.label :購入単位のグラム数
-        td.right
-          = f.text_field :gram_at_a_time, :size=>'40'
-      tr
-        td.left
-          = f.label :購入単位の価格
-        td.right
-          = f.text_field :price_at_a_time, :size=>'40'
-      tr
-        td.left
-          = f.label :個単位の価格
-        td.right
-          = f.text_field :price_at_one_amount, :size=>'40'
-      tr
-        td.left
-          = f.label :グラム単位の価格
-        td.right
-          = f.text_field :price_at_one_gram, :size=>'40'
-      tr
-        td.left
-          = f.label :購入日
-        td.right
-          = f.date_select :start, :size=>'40'
-      tr
-        td.left
-          = f.label :賞味期限日
-        td.right
-          = f.date_select :end, :size=>'40'
-      tr
-        td.left
-          = f.label :残数
-        td.right
-          = f.text_field :remaining_amount, :size=>'40'
-      tr
-        td.left
-          = f.label :残グラム
-        td.right
-          = f.text_field :remaining_gram, :size=>'40'
-      tr
-        td.left
-          = f.label :コメント
-        td.right
-          = f.text_area :description, :size=>'40x5'
-      tr
-        td.left
-          = f.label :アイコン
-        td.right
-          = f.file_field :icon
-          /= f.file_field :icon,accept: "image/jpeg"
-  .actions = f.submit '編集を反映'
+div.main_content.clearfix
+  /ページ遷移したくないので:remote => trueにしておく
+  = form_for @item, :remote => true do |f|
+    - if @item.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@item.errors.count, "error")} prohibited this item from being saved:"
+        ul
+          - @item.errors.full_messages.each do |message|
+            li = message
+
+    .actions = f.submit '編集を反映'
+    table
+      tbody
+        tr
+          td.left
+            = f.label :食材名
+          td.right
+            = f.text_field :title, :size=>'40'
+        tr
+          td.left
+            = f.label :購入単位の個数
+          td.right
+            = f.text_field :amount_at_a_time, :size=>'40'
+        tr
+          td.left
+            = f.label :購入単位のグラム数
+          td.right
+            = f.text_field :gram_at_a_time, :size=>'40'
+        tr
+          td.left
+            = f.label :購入単位の価格
+          td.right
+            = f.text_field :price_at_a_time, :size=>'40'
+        tr
+          td.left
+            = f.label :個単位の価格
+          td.right
+            = f.text_field :price_at_one_amount, :size=>'40'
+        tr
+          td.left
+            = f.label :グラム単位の価格
+          td.right
+            = f.text_field :price_at_one_gram, :size=>'40'
+        tr
+          td.left
+            = f.label :購入日
+          td.right
+            = f.date_select :start, :size=>'40'
+        tr
+          td.left
+            = f.label :賞味期限日
+          td.right
+            = f.date_select :end, :size=>'40'
+        tr
+          td.left
+            = f.label :残数
+          td.right
+            = f.text_field :remaining_amount, :size=>'40'
+        tr
+          td.left
+            = f.label :残グラム
+          td.right
+            = f.text_field :remaining_gram, :size=>'40'
+        tr
+          td.left
+            = f.label :コメント
+          td.right
+            = f.text_area :description, :size=>'40x5'
+        tr
+          td.left
+            = f.label :アイコン
+          td.right
+            = f.file_field :icon
+            /= f.file_field :icon,accept: "image/jpeg"
 
 div.div_button_container.clearfix
   div.div_button.button_edit
