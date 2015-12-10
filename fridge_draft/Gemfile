@@ -47,6 +47,13 @@ gem 'nokogiri'
 gem 'anemone'
 gem 'addressable'
 
+# 画像アップロード用
+gem 'carrierwave'
+gem 'rmagick'
+
+# フォームから画像をアップロードする際の InvalidAuthenticityToken 対策
+gem 'remotipart'
+
 # itamae用
 gem 'itamae'
 

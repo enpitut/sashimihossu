@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209230047) do
+ActiveRecord::Schema.define(version: 20151210101623) do
 
   create_table "freshnesses", force: :cascade do |t|
     t.string   "name"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20151209230047) do
     t.float    "price_at_one_amount"
     t.float    "price_at_one_gram"
     t.text     "description"
-    t.binary   "icon"
+    t.string   "icon"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "user_id"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20151209230047) do
     t.text     "description"
     t.string   "sex"
     t.string   "age"
-    t.binary   "icon"
+    t.string   "icon"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

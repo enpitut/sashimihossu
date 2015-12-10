@@ -62,12 +62,13 @@
         td.left
           = f.label :コメント
         td.right
-          = f.text_area :description, :size=>'40x10'
-      /tr
+          = f.text_area :description, :size=>'40x5'
+      tr
         td.left
           = f.label :アイコン
-          = f.text_field :icon
-          = f.file_field :icon,accept: "image/jpeg"
+        td.right
+          = f.file_field :icon
+          /= f.file_field :icon,accept: "image/jpeg"
   .actions = f.submit '編集を反映'
 
 div.div_button_container.clearfix

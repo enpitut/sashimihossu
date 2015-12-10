@@ -1,0 +1,3 @@
+// 部分テンプレート(_show)を表示(前回の内容を消してから)
+$("#right-column").html("");
+$("#right-column").html("<%= j( render(:partial => 'show_recipes') ) %>");

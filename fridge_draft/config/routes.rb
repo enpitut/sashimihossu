@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   # 現在ログイン中のユーザidが所持するアイテム一覧がjsonで返る．
   # resourcesより前に定義すること．そうしないと，通常のitems/1といったルーティングと混同されてしまう．
   get 'items/index_by_user' => 'items#index_by_user'
+  get 'items/show_recipes' => 'items#show_recipes'
   resources :items
 
   # freshness用

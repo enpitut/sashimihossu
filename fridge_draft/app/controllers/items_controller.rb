@@ -129,6 +129,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show_recipes
+    array = Array.new
+    # 複数渡せるようにarrayにしているが，フロントが複数選択に未対応のためとりあえず1個だけクエリを渡す．
+    array << params[:name]
+    @recipes = acquire_recommended_recipes(array);
+    respond_to do |format|
+      format.js # show_recipes.js.erb が実行される
+    end
+  end
+
 
   #=================================================================================================================================================
   # テキストファイルに落としたメールをパースしてデータを登録

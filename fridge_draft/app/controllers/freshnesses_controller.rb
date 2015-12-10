@@ -70,9 +70,12 @@ class FreshnessesController < ApplicationController
   #=================================================================================================================================================
   # アイテム名から賞味期間をとってくる
   def freshness_by_name
-    @freshness = Freshness.where(:name => params['name']).first();
+    @freshness = 0
+    if Freshness.where(:name => params['name']).exists?
+      @freshness = Freshness.where(:name => params['name']).first().freshness;
+    end
     respond_to do |format|
-      format.json { render :json => @freshness.freshness }
+      format.json { render :json => @freshness }
       # format.json { render :json => @freshness, location: @freshness }
     end
   end

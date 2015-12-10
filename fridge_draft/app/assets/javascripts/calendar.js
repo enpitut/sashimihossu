@@ -138,10 +138,18 @@ $(document).ready(function() {
                 dataType: "json",
                 data: data
             }).done(function(response){
+                //
+            }).fail(function(response){
+                //alert("error!");
+            //以前のcompleteに相当．ajaxの通信に成功した場合はdone()と同じ，失敗した場合はfail()と同じ引数を返す．
+            }).always(function(response){
                 //console.log(response);
+                // 賞味期限を取得(該当する食材がデータベースに無かった場合は0が返ってくる)
                 freshness = response;
+                // 賞味期限が見つかった場合はそれをもとに賞味期限日付を設定．
+                // 見つからなかった場合はカレンダーで範囲選択された際のそのままの終了日を設定
                 var end2 = end;
-                if (freshness != -1) {
+                if (freshness != 0) {
                     end2 = end2.add('days', freshness);
                 }
 
@@ -192,11 +200,7 @@ $(document).ready(function() {
                 }).fail(function(response){ //ajaxの通信に失敗した場合
                     alert("error!");
                 });
-            }).fail(function(response){
-                alert("error!");
             });
-
-
         },
 
         // カレンダーのマス内のイベント部分をクリックしたときの処理
@@ -219,6 +223,7 @@ $(document).ready(function() {
             //var editUrl = "/items/" + event.id + "/edit";
             //window.location.href = editUrl;
 
+            // アイテムのshowを表示
             $.ajax({
                 type: "GET",
                 url: "/items/" + event.id + ".js",

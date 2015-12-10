@@ -11,4 +11,6 @@ class User < ActiveRecord::Base
   # 上記をやめた．つまりある1つのitemが複数のユーザに属するような使い回しの必要性を感じなくなったので．
   has_many :items
 
+  # carrierwave用
+  mount_uploader :icon, IconUploader
 end

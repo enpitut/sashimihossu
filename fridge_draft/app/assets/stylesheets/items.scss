@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+.item_icon {
+  border-radius: 50px;
+}
+
 #right-column {
   overflow-y: scroll;
 
@@ -11,7 +16,7 @@
     width: 100%;
 
     tr {
-      height: 60px;
+      height: 50px;
       color: #ffffff;
 
       td {
@@ -26,6 +31,16 @@
         //width: 60%;
         padding-left: 20px;
         padding-right: 20px;
+      }
+      td.icon_td {
+        padding: 10px 0;
+        text-align: center;
+      }
+    }
+    tr:first-child {
+      td {
+        font-size: 18px;
+        font-weight: bold;
       }
     }
     tr:nth-child(even) {
@@ -78,7 +93,9 @@
       -moz-opacity: 0.2;
       opacity: 0.2;
     }
-  }
+  }.div_button.button_recipe {
+     background-color: rgb(195, 193, 86);
+   }
   .div_button.button_edit {
     background-color: rgb(120, 171, 172);
   }

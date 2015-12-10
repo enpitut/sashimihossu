@@ -17,4 +17,5 @@
 //= require turbolinks
 //= require fullcalendar
 //= require fullcalendar/gcal
+//= require jquery.remotipart
 //= require_tree .

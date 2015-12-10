@@ -1,0 +1,30 @@
+- @recipes.each do |recipe|
+  table
+    tbody
+      /tr
+        td.icon_td colspan='2'
+          = image_tag @item.icon.url, :class => 'item_icon'
+      tr
+        td.left
+          strong レシピ名:
+        td.right
+          = recipe.title
+      tr
+        td.left
+          strong url:
+        td.right
+          = recipe.url
+      = recipe.ingredient_list.each do |ingredient|
+        tr
+          td.left
+            strong = ingredient.name
+          td.right
+            = ingredient.amount
+
+  /div.div_button_container.clearfix
+  /div.div_button.button_recipe
+  /  = link_to 'この食材でレシピを提案', edit_item_path(@item), :remote => true
+  /div.div_button.button_edit
+  /  = link_to '編集', edit_item_path(@item), :remote => true
+  /div.div_button.button_destroy
+  /  = link_to '破棄', @item, data: {:confirm => '本当に破棄しますか？'}, :method => :delete, :remote => true
